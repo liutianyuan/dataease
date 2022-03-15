@@ -22,7 +22,7 @@
     left: 0;
     z-index: 999;
     overflow: hidden;
-    
+
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
     }
@@ -63,10 +63,10 @@
       border: none;
       height: 100%;
       width: 100% !important;
-      background-color: var(--SiderBG, #ffffff);     
+      background-color: var(--SiderBG, #ffffff);
     }
 
-    
+
 
     .submenu-title-noDropdown:not(.is-active), .el-submenu__title {
       color: var(--SiderTextColor, #1e212a);
@@ -89,15 +89,17 @@
         color: var(--TextActive, #409EFF);
     }
 
-    
+
 
     & .nest-menu .el-submenu > .el-submenu__title,
     & .el-submenu .el-menu-item {
       min-width: $sideBarWidth !important;
-      background-color: var(--SiderBG) !important;
+      background-color: transparent;
+      /*background-color: var(--SiderBG) !important;*/
       color: var(--SiderTextColor);
       &:hover {
-        background-color: var(--MenuHovorBG, rgba(158,158,158,.2)) !important;
+        /*background-color: var(--MenuHovorBG, rgba(158,158,158,.2)) !important;*/
+        background-color: transparent;
         color: var(--TextActive) !important;
       }
     }
@@ -105,11 +107,12 @@
     & .nest-menu .el-submenu > .el-submenu__title,
     & .el-submenu .is-active.el-menu-item {
       min-width: $sideBarWidth !important;
-      background-color: var(--SiderBG) !important;
+      background-color: transparent;
+      /*background-color: var(--SiderBG) !important;*/
       color: var(--TextActive, #409EFF);
-      
+
     }
-    
+
 
   }
 
@@ -160,7 +163,7 @@
             overflow: hidden;
             visibility: hidden;
             display: inline-block;
-            
+
           }
         }
       }
@@ -173,7 +176,7 @@
     min-width: $sideBarWidth !important;
   }
 
-  
+
 
   .withoutAnimation {
 
@@ -194,8 +197,8 @@
   .nest-menu .el-submenu > .el-submenu__title,
   .el-menu-item {
     &:hover {
-      // background-color: $leftMenuHovor !important;
-      background-color: var(--SiderBG) !important;
+      background-color: transparent;
+      color: $active;
     }
   }
 

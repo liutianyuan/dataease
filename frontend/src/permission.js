@@ -99,21 +99,27 @@ export const loadMenus = (next, to) => {
     const filterDatas = filterRouter(datas)
     const asyncRouter = filterAsyncRouter(filterDatas)
     // 如果包含首页 则默认页面是 首页 否则默认页面是仪表板页面
-    if (JSON.stringify(datas).indexOf('wizard') > -1) {
-      asyncRouter.push({
-        path: '/',
-        component: Layout,
-        redirect: '/wizard/index',
-        hidden: true
-      })
-    } else {
-      asyncRouter.push({
-        path: '/',
-        component: Layout,
-        redirect: '/panel/index',
-        hidden: true
-      })
-    }
+    // if (JSON.stringify(datas).indexOf('wizard') > -1) {
+    //   asyncRouter.push({
+    //     path: '/',
+    //     component: Layout,
+    //     redirect: '/wizard/index',
+    //     hidden: true
+    //   })
+    // } else {
+    //   asyncRouter.push({
+    //     path: '/',
+    //     component: Layout,
+    //     redirect: '/panel/index',
+    //     hidden: true
+    //   })
+    // }
+    asyncRouter.push({
+      path: '/',
+      component: Layout,
+      redirect: '/panel/index',
+      hidden: true
+    })
 
     asyncRouter.push({
       path: '*',

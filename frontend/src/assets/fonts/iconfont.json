@@ -1,0 +1,44 @@
+{
+  "id": "3237086",
+  "name": "BI 大数据平台",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "28169069",
+      "name": "icon_仪表板",
+      "font_class": "icon_yibiaoban",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "28169070",
+      "name": "icon_首页",
+      "font_class": "icon_shouye",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "28169071",
+      "name": "icon_数据源",
+      "font_class": "icon_shujuyuan",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "28169072",
+      "name": "icon_系统管理",
+      "font_class": "icon_xitongguanli",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "28169318",
+      "name": "icon_数据集",
+      "font_class": "icon_shujuji",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    }
+  ]
+}

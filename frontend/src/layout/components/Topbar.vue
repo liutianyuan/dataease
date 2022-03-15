@@ -1,8 +1,10 @@
 <template>
   <div class="top-nav">
     <div v-loading="!axiosFinished" class="log">
-      <svg-icon v-if="!logoUrl && axiosFinished" icon-class="DataEase" custom-class="top-nav-logo-icon" />
-      <img v-if="logoUrl && axiosFinished" :src="logoUrl" width="140" alt="" style="padding-top: 10px;">
+      <img :src="DataEaseImg" alt="">
+      <span>数据可视化分析平台</span>
+      <!--<svg-icon v-if="!logoUrl && axiosFinished" icon-class="DataEase" custom-class="top-nav-logo-icon" />
+      <img v-if="logoUrl && axiosFinished" :src="logoUrl" width="140" alt="" style="padding-top: 10px;">-->
     </div>
     <el-menu
       class="de-top-menu"
@@ -14,8 +16,17 @@
     >
       <div v-for="item in permission_routes" :key="item.path" class="nav-item">
         <app-link :to="resolvePath(item)">
-          <el-menu-item v-if="!item.hidden" :index="item.path">
-            {{ item.meta ? item.meta.title : item.children[0].meta.title }}</el-menu-item>
+          <el-menu-item v-if="!item.hidden && item.path!=='/wizard'" :index="item.path">
+            <span>
+              <!--<i class="iconfont icon-icon_shouye" v-if="item.path==='/wizard'" />-->
+              <i class="el-icon-document tablepanel-i" v-if="item.path==='/panel'" />
+              <!--<i class="iconfont icon-icon_yibiaoban" v-if="item.path==='/panel'" />-->
+              <i class="iconfont icon-icon_shujuyuan" v-if="item.path==='/dataset'" />
+              <i class="iconfont icon-icon_xitongguanli" v-if="item.path==='/datasource'" />
+              <i class="iconfont icon-icon_shujuji" v-if="item.path==='/system'" />
+            </span>
+            <p>{{ item.meta ? item.meta.title : item.children[0].meta.title }}</p>
+          </el-menu-item>
         </app-link>
       </div>
     </el-menu>
@@ -25,15 +36,6 @@
 
         <notification class="right-menu-item hover-effect" />
         <lang-select class="right-menu-item hover-effect" />
-        <div style="height: 100%;padding: 0 8px;" class="right-menu-item hover-effect">
-          <a
-            href="https://dataease.io/docs/"
-            target="_blank"
-            style="display: flex;height: 100%;width: 100%;justify-content: center;align-items: center;"
-          >
-            <svg-icon icon-class="docs" />
-          </a>
-        </div>
       </template>
 
       <el-dropdown
@@ -60,9 +62,6 @@
             <el-dropdown-item>{{ $t('user.change_password') }}</el-dropdown-item>
           </router-link>
 
-          <router-link to="/about/index">
-            <el-dropdown-item>{{ $t('commons.about_us') }}</el-dropdown-item>
-          </router-link>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">{{ $t('commons.exit_system') }}</span>
           </el-dropdown-item>
@@ -95,6 +94,7 @@ import {
 import {
   initTheme
 } from '@/utils/ThemeUtil'
+import DataEaseImg from '@/assets/DataEase.png'
 export default {
   name: 'Topbar',
   components: {
@@ -114,7 +114,8 @@ export default {
       uiInfo: null,
       logoUrl: null,
       axiosFinished: false,
-      isPluginLoaded: false
+      isPluginLoaded: false,
+      DataEaseImg
     }
   },
 
@@ -341,6 +342,47 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+  @import "~@/styles/variables.scss";
+  ::v-deep .el-menu-item{
+    line-height: 32px;
+    font-size: 18px;
+    transition: none !important;
+    span{
+      display: block;
+      text-align: center;
+      padding-top: 8px;
+      height: 16px;
+      i,.tablepanel-i{
+        line-height: 1;
+        vertical-align: top;
+      }
+    }
+    p{
+      margin: 0;
+      margin-top: 8px;
+      line-height: 24px;
+      font-size: 14px;
+    }
+    position: relative;
+    &::after{
+      content: '';
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 4px;
+      transition: all .3s cubic-bezier(.23,1,.32,1);
+      background: #ffffff;
+    }
+    &:hover {
+      background-color: transparent !important;
+      color: $active !important;
+      span i{
+        color: $active !important;
+      }
+    }
+  }
   .el-dropdown-link {
     cursor: pointer;
     color: #1e212a;

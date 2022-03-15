@@ -639,7 +639,7 @@ export default {
       })
     },
 
-    nodeClick(data, node) {
+    nodeClick(data, node) { console.log(data,node,'----')
       this.lastActiveNode = node
       this.lastActiveNodeData = data
       this.activeTree = data.panelType

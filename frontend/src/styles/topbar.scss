@@ -6,48 +6,53 @@
   z-index: 1001;
   overflow: hidden;
   border-bottom: 1px solid var(--TopBG, #E6E6E6);
-  background-color: var(--TopBG, #f1f3f8); 
+  background-color: #ffffff;
   .log {
-    padding: 0 16px;
-    line-height: 56px;
-    height: 56px;
-    font-size: 24px;
-    font-weight: bold;
-
     float: left;
-
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    padding: 0 16px;
+    line-height: 32px;
+    height: 32px;
+    font-size: 16px;
     img {
       width: auto;
-      max-height: 45px;
+      max-height: 26px;
+      margin-right: 8px;
     }
   }
 
   .el-menu {
     float: left;
     border: none !important;
-    background-color: var(--TopBG, #f1f3f8) !important;
     .nav-item {
       display: inline-block;
+      vertical-align: top;
 
       .el-menu-item:not(.is-active) {
-        color: var(--TopTextColor, #1e212a);
-        opacity: 0.65;
+        /*color: var(--TopTextColor, #1e212a);
+        opacity: 0.65;*/
         &:hover {
-          background-color: var(--MenuHovorBG, rgba(158,158,158,.2)) !important;
+          background-color: transparent;
           opacity: 1;
         }
 
         &:focus {
-          background-color: var(--MenuActiveBG, $--color-primary) !important;
+          background-color: transparent;
           opacity: 1;
-          color: var(--TopTextColor, #f4f4f5);
+          /*color: var(--TopTextColor, #f4f4f5);*/
         }
 
       }
       .el-menu-item.is-active {
-        background-color: var(--MenuActiveBG, $--color-primary) ;
-        color: var(--TextActive, #f4f4f5) !important;
+        color: $active !important;
         opacity: 1;
+        &::after{
+          width: 100%;
+          left: 0;
+          background: $active;
+        }
       }
 
     }
@@ -71,7 +76,7 @@
       padding: 10px 8px;
       height: 100%;
       font-size: 18px;
-      
+
       vertical-align: text-bottom;
 
       &.hover-effect {

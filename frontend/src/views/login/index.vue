@@ -2,18 +2,20 @@
   <div v-show="contentShow" class="login-background">
     <div class="login-container">
       <el-row v-loading="loading" type="flex">
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form ref="loginForm" :model="loginForm" :rules="loginRules" size="default">
             <div class="login-logo">
-              <svg-icon v-if="!loginLogoUrl && axiosFinished" icon-class="DataEase" custom-class="login-logo-icon" />
-              <img v-if="loginLogoUrl && axiosFinished" :src="loginLogoUrl" alt="">
+              <!--<svg-icon v-if="!loginLogoUrl && axiosFinished" icon-class="DataEase" custom-class="login-logo-icon" />-->
+              <img :src="DataEaseImg" alt="">
+              <p>数据可视化分析平台</p>
+              <!--<img v-if="loginLogoUrl && axiosFinished" :src="loginLogoUrl" alt="">-->
             </div>
-            <div v-if="uiInfo && uiInfo['ui.loginTitle'] && uiInfo['ui.loginTitle'].paramValue" class="login-welcome">
+            <!--<div v-if="uiInfo && uiInfo['ui.loginTitle'] && uiInfo['ui.loginTitle'].paramValue" class="login-welcome">
               {{ uiInfo['ui.loginTitle'].paramValue }}
             </div>
             <div v-else class="login-welcome">
               {{ $t('login.welcome') + (uiInfo && uiInfo['ui.title'] && uiInfo['ui.title'].paramValue || ' DataEase') }}
-            </div>
+            </div>-->
             <div class="login-form">
               <el-form-item v-if="loginTypes.length > 1">
                 <el-radio-group v-if="loginTypes.length > 1" v-model="loginForm.loginType" @change="changeLoginType">
@@ -50,10 +52,10 @@
             </div>
           </el-form>
         </el-col>
-        <el-col v-loading="!axiosFinished" :span="12">
+        <!--<el-col v-loading="!axiosFinished" :span="12">
           <div v-if="!loginImageUrl && axiosFinished" class="login-image" />
           <div v-if="loginImageUrl && axiosFinished" class="login-image-de" :style="{background:'url(' + loginImageUrl + ') no-repeat', 'backgroundSize':'contain'}" />
-        </el-col>
+        </el-col>-->
       </el-row>
     </div>
     <plugin-com v-if="loginTypes.includes(2) && loginForm.loginType === 2" ref="SSOComponent" component-name="SSOComponent" />
@@ -69,6 +71,7 @@ import { getSysUI } from '@/utils/auth'
 import { initTheme } from '@/utils/ThemeUtil'
 import PluginCom from '@/views/system/plugin/PluginCom'
 import Cookies from 'js-cookie'
+import DataEaseImg from '@/assets/DataEase.png'
 export default {
   name: 'Login',
   components: { PluginCom },
@@ -98,7 +101,8 @@ export default {
         'panel-default-tree',
         'chart-tree',
         'dataset-tree'
-      ]
+      ],
+      DataEaseImg
     }
   },
   computed: {
@@ -203,7 +207,8 @@ export default {
           }
           const publicKey = localStorage.getItem('publicKey')
           this.$store.dispatch('user/login', user).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
+            // this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({ path: '/panel/index' })
             this.loading = false
           }).catch(() => {
             this.loading = false
@@ -234,36 +239,39 @@ export default {
 }
 
 .login-background {
-  background-color: var(--MainBG, $--background-color-base);
+  background: url("../../assets/login-bg.jpg") no-repeat;
+  background-size: 100% 100%;
   height: 100vh;
   @include login-center;
 }
 
 .login-container {
-  min-width: 900px;
-  width: 1280px;
-  height: 520px;
-  background-color: var(--ContentBG, #FFFFFF);
-  @media only screen and (max-width: 1280px) {
-    width: 900px;
-    height: 380px;
-  }
-
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  width: 420px;
+  background: #ffffff;
+  border-radius: 12px;
   .login-logo {
-    margin-top: 50px;
+    margin-top: 30px;
     text-align: center;
-    @media only screen and (max-width: 1280px) {
-      margin-top: 20px;
-    }
     img{
       /*width: 240px;*/
       width: auto;
+      margin: 0 auto;
       max-height: 60px;
       @media only screen and (max-width: 1280px) {
         /*width: 200px;*/
         width: auto;
         max-height: 50px;
       }
+    }
+    p{
+      margin: 8px 0 20px;
+      font-size: 22px;
+      font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;
+      font-weight: bold;
+      color: #1890FF;
     }
   }
 
@@ -315,13 +323,15 @@ export default {
   }
 
   .login-form {
-    margin-top: 80px;
-    padding: 0 40px;
+    padding: 0 36px;
 
     @media only screen and (max-width: 1280px) {
       margin-top: 40px;
     }
 
+    & ::v-deep .el-form-item{
+      margin-bottom: 32px;
+    }
     & ::v-deep .el-input__inner {
       border-radius: 20px;
       border: 1px solid transparent;
@@ -350,24 +360,6 @@ export default {
     padding: 0 40px;
     color: $--color-danger;
     text-align: center;
-  }
-
-  .login-image {
-    background: url(../../assets/login-desc.png) no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 520px;
-    @media only screen and (max-width: 1280px) {
-      height: 380px;
-    }
-  }
-  .login-image-de {
-    background-size: cover;
-    width: 100%;
-    height: 520px;
-    @media only screen and (max-width: 1280px) {
-      height: 380px;
-    }
   }
 }
 </style>
